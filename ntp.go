@@ -61,7 +61,8 @@ func queryNTP(ip string) (*ntp.Response, error) {
 				retErr = 65
 			}
 			// if there was an error the wait before trying again
-			time.Sleep(time.Second)
+			// sleep 1, 2, 3 seconds plus the ntp.Query 5 second timeout
+			time.Sleep(time.Duration(i+1) * time.Second)
 		} else {
 			// all good so carry on
 			return response, nil
